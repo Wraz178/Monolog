@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* Видео фон */
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Контейнер */
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 500px);
+    gap: 10px 100px; /* вертикаль / горизонталь */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Карточки */
+.card {
+    width: 450px;
+    height: 250px;
+    cursor: pointer;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    transition: 
+        transform 0.4s ease,
+        box-shadow 0.5s ease,
+        filter 0.4s ease;
+
+    animation: idleGlow 6s ease-in-out infinite;
+}
+/* шахматный сдвиг */
+.card:nth-child(odd) {
+    transform: translateY(-60px);
+}
+
+.card:nth-child(even) {
+    transform: translateY(60px);
+}
+
+/* Картинка */
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* При наведении */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.7);
+    filter: brightness(1.1);
+}
+
+/* Активное состояние (играет звук) */
+.card.active {
+    animation: glowPulse 4s infinite;
+    border: 1px solid rgba(0, 150, 255, 0.6);
+    box-shadow: 
+        0 0 20px rgba(0, 150, 255, 0.8),
+        0 0 40px rgba(0, 150, 255, 0.6),
+        0 0 80px rgba(0, 150, 255, 0.4);
+
+    transform: scale(1.07);
+    filter: brightness(1.1);
+}
+@keyframes glowPulse {
+    0% {
+        box-shadow: 
+            0 0 20px rgba(0, 150, 255, 0.6),
+            0 0 40px rgba(0, 150, 255, 0.4);
+    }
+    50% {
+        box-shadow: 
+            0 0 40px rgba(0, 150, 255, 1),
+            0 0 80px rgba(0, 150, 255, 0.7);
+    }
+    100% {
+        box-shadow: 
+            0 0 20px rgba(0, 150, 255, 0.6),
+            0 0 40px rgba(0, 150, 255, 0.4);
+    }
+}
+
+
+@keyframes idleGlow {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.45);
+        filter: brightness(1);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.65);
+        filter: brightness(1.05);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.45);
+        filter: brightness(1);
+    }
+}
+.number {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+
+    font-size: 32px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+.card:nth-child(2) .number {
+    color: rgba(0, 150, 255, 0.9);
+    text-shadow: 0 0 12px rgba(0, 150, 255, 0.9);
+}
